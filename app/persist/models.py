@@ -2,18 +2,7 @@ from datetime import datetime
 from app import db
 
 
-class SerializableModel(object):
-    def to_dict(self):
-        value = {}
-        for column in self.__table__.columns:
-            attribute = getattr(self, column.name)
-            if isinstance(attribute, datetime):
-                attribute = str(attribute)
-            value[column.name] = attribute
-        return value
-
-
-class Message(db.Model, SerializableModel):
+class Message(db.Model):
     __tablename__ = 'Message'
 
     MessageSid = db.Column(db.String, primary_key=True)
