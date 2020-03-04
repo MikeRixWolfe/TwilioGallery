@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">NoXD</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/gallery">Gallery</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User Galleries
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for user in pb %}
+                    <a class="dropdown-item" href="/gallery/{{ user.Name }}">{{ user.Name }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://github.com/MikeRixWolfe/TwilioGallery">Source</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid col-xs-12">
+        {% for msg in msgs %}
+        <div class="image-container">
+            <div class="">
+                <a href="{{ msg.Message.MediaUrl }}" >
+                    <img src="{{ msg.Message.MediaUrl}}" alt="{{ msg.Message.Body }}" />
+                </a>
+            </div>
+            <p class="description"><a href="/gallery/{{ msg.Phonebook.Name }}">{{ msg.Phonebook.Name }}</a> {{ msg.Message.Body }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <script>
+        function update_widths() {
+            $('img').each(function() {
+                $(this).attr('class', 'portrait');
+            });
+
+            $("p.description").each(function() {
+                $(this).width($(this).parent().width() - 30);
+            });
+        }
+
+        $(window).on('load', function () {
+            update_widths();
+        });
+
+        $(window).on('resize', function() {
+            update_widths();
+        });
+    </script>
+{% endblock %}

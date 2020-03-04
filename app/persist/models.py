@@ -24,3 +24,13 @@ class Message(db.Model):
         self.To = To
         self.MediaUrl = MediaUrl
 
+class Phonebook(db.Model):
+    __tablename__ = 'Phonebook'
+
+    Name = db.Column(db.String, primary_key=True)
+    Number = db.Column(db.String)
+
+    def __init__(self, name, number):
+        self.Name = name
+        self.Number = number
+
