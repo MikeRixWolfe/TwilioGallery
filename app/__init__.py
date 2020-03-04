@@ -5,4 +5,4 @@ app = Flask(__name__)
 app.config.from_pyfile('app.cfg')
 db = SQLAlchemy(app)
 
-from app.views import gallery, image
+from app import views
