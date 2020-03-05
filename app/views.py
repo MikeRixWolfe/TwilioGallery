@@ -1,11 +1,17 @@
-from flask import render_template
-from app import app, db
+from flask import render_template, flash, redirect, url_for, Blueprint
+from flask_login import current_user, login_required
+
+from app import app, db, login
 from app.models import Message, Phonebook
 
 
-@app.route('/gallery', defaults={'name': None}, strict_slashes=False, methods=['GET'])
-@app.route('/gallery/<name>', strict_slashes=False, methods=['GET'])
-def gallery(name):
+bp = Blueprint('gallery', __name__, url_prefix='/gallery')
+
+
+@bp.route('/', defaults={'name': None}, methods=['GET'])
+@bp.route('/<name>', methods=['GET'])
+@login_required
+def index(name):
     if name:
         messages = db.session.query(Message, Phonebook) \
             .outerjoin(Phonebook, Phonebook.Number==Message.From) \
@@ -34,10 +40,11 @@ def gallery(name):
         .order_by(Phonebook.Name.asc()) \
         .distinct(Phonebook.Name)
 
-    return render_template('gallery.html', msgs=messages, pb=phonebook)
+    return render_template('index.html', msgs=messages, pb=phonebook)
 
 
-@app.route('/image/<sid>', strict_slashes=False, methods=['GET'])
+@bp.route('/image/<sid>', methods=['GET'])
+@login_required
 def image(sid):
     messages = db.session.query(Message, Phonebook) \
         .outerjoin(Phonebook, Phonebook.Number==Message.From) \

@@ -9,14 +9,11 @@ h1 {
     margin: 10px 0px 10px 0px;
     line-height: 1.27778;
     text-transform: uppercase;
+    text-align: center;
 }
 
 img {
     visibility: hidden;
-}
-
-p {
-    font-style: italic;
 }
 
 a {
@@ -65,7 +62,7 @@ a {
     visibility: visible;
 }
 
-.body {
+.content {
     margin: auto;
     width: 90%;
     max-width:1200px
@@ -104,4 +101,18 @@ a {
     background-color: rgb(39, 39, 39);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2);
 
+}
+
+.navbar-text {
+    padding-right: .5rem;
+    padding-left: .5rem;
+}
+
+.navbar-text a {
+    color: rgba(255,255,255,.5) !important;
+}
+
+.navbar-text a:hover {
+    color: rgba(255,255,255,.75) !important;
+    text-decoration: none;
 }

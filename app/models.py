@@ -1,4 +1,7 @@
 from datetime import datetime
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from app import db
 
 
@@ -24,6 +27,7 @@ class Message(db.Model):
         self.To = To
         self.MediaUrl = MediaUrl
 
+
 class Phonebook(db.Model):
     __tablename__ = 'Phonebook'
 
@@ -33,4 +37,24 @@ class Phonebook(db.Model):
     def __init__(self, name, number):
         self.Name = name
         self.Number = number
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = 'User'
+
+    Username = db.Column(db.String, primary_key=True)
+    Password = db.Column(db.String)
+    Authenticated = db.Column(db.Boolean, default=False)
+
+    def __init__(self, username):
+        self.Username = username
+
+    def set_password(self, password):
+        self.Password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.Password, password)
+
+    def get_id(self):
+        return self.Username
 
