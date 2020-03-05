@@ -2,7 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/gallery/static')
 app.config.from_pyfile('app.cfg')
 app.url_map.strict_slashes = False
 
