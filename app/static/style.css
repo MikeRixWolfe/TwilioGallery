@@ -116,3 +116,33 @@ a {
     color: rgba(255,255,255,.75) !important;
     text-decoration: none;
 }
+
+.pagination>li>a, .pagination>li>span {
+    background-color: rgb(39, 39, 39);
+    color: white;
+    border: 1px solid black;
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    text-decoration: none;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    z-index: 3;
+    color: white;
+    background-color: rgb(49, 49, 49);
+    border-color: black;
+}
+
+.pagination>li.unavailable>a, .pagination>li.current>a {
+    color: gray;
+}
+
+.pagination-parent {
+    text-align: center;
+    margin: auto;
+}

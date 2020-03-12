@@ -1,4 +1,5 @@
-from flask import render_template, flash, redirect, url_for, Blueprint
+from flask import render_template, flash, redirect, request, url_for, Blueprint
+from flask_paginate import Pagination
 from flask_login import current_user, login_required
 
 from app import app, db, login
@@ -40,7 +41,18 @@ def index(name):
         .order_by(Phonebook.Name.asc()) \
         .distinct(Phonebook.Name)
 
-    return render_template('index.html', msgs=messages, pb=phonebook)
+    per_page = app.config.get('PER_PAGE', 50)
+    page = request.args.get('page', type=int, default=1)
+    pagination = Pagination(page = page,
+                            per_page = per_page,
+                            total = len(messages),
+                            css_framework = 'foundation',
+                            prev_label = '< Prev',
+                            next_label = 'Next >')
+    page_msgs = messages[(page-1)*per_page:page*per_page]
+
+
+    return render_template('index.html', pagination=pagination, msgs=page_msgs, pb=phonebook)
 
 
 @bp.route('/image/<sid>', methods=['GET'])

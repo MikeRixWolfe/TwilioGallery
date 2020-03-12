@@ -1,5 +1,6 @@
 Flask
 Flask-Login
+Flask-Paginate
 Flask-SQLAlchemy
 Flask-WTF
 SQLAlchemy
