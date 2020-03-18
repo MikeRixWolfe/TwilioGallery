@@ -51,7 +51,6 @@ def index(name):
                             next_label = 'Next >')
     page_msgs = messages[(page-1)*per_page:page*per_page]
 
-
     return render_template('index.html', pagination=pagination, msgs=page_msgs, pb=phonebook)
 
 

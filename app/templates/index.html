@@ -19,7 +19,7 @@
                         <img src="{{ msg.Message.MediaUrl}}" title="{{ msg.Message.Body }}" />
                     </a>
                 </div>
-                <p class="description"><a href="{{ url_for('gallery.index', name=msg.Phonebook.Name) }}">{{ msg.Phonebook.Name }}</a> {{ msg.Message.Body }}</p>
+                <p class="description" title="{{ msg.Message.Body}}"><a href="{{ url_for('gallery.index', name=msg.Phonebook.Name) }}" title="{{msg.Phonebook.Name}}'s Gallery">{{ msg.Phonebook.Name }}</a> {{ msg.Message.Body }}</p>
             </div>
         </div>
         {% endfor %}
