@@ -41,7 +41,7 @@ def index(name):
         .order_by(Phonebook.Name.asc()) \
         .distinct(Phonebook.Name)
 
-    per_page = app.config.get('PER_PAGE', 50)
+    per_page = app.config.get('PER_PAGE', 54)
     page = request.args.get('page', type=int, default=1)
     pagination = Pagination(page = page,
                             per_page = per_page,
