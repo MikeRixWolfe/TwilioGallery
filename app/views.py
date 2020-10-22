@@ -15,7 +15,7 @@ bp = Blueprint('gallery', __name__, url_prefix='/gallery')
 def index(name):
     if name:
         messages = db.session.query(Message, Phonebook) \
-            .outerjoin(Phonebook, Phonebook.Number==Message.From) \
+            .join(Phonebook, Phonebook.Number==Message.From) \
             .filter(Message.AccountSid==app.config['TWILIO_ACCOUNT_SIDS_CSV']) \
             .filter(Message.To==app.config['PHONE_NUMBER']) \
             .filter(Message.MediaUrl!=None) \
@@ -24,7 +24,7 @@ def index(name):
             .all()
     else:
         messages = db.session.query(Message, Phonebook) \
-            .outerjoin(Phonebook, Phonebook.Number==Message.From) \
+            .join(Phonebook, Phonebook.Number==Message.From) \
             .filter(Message.AccountSid==app.config['TWILIO_ACCOUNT_SIDS_CSV']) \
             .filter(Message.To==app.config['PHONE_NUMBER']) \
             .filter(Message.MediaUrl!=None) \
@@ -33,7 +33,7 @@ def index(name):
             .all()
 
     phonebook = db.session.query(Phonebook) \
-        .outerjoin(Message, Phonebook.Number==Message.From) \
+        .join(Message, Phonebook.Number==Message.From) \
         .filter(Message.AccountSid==app.config['TWILIO_ACCOUNT_SIDS_CSV']) \
         .filter(Message.To==app.config['PHONE_NUMBER']) \
         .filter(Message.MediaUrl!=None) \
@@ -62,12 +62,11 @@ def image(sid):
         .filter(Message.AccountSid==app.config['TWILIO_ACCOUNT_SIDS_CSV']) \
         .filter(Message.To==app.config['PHONE_NUMBER']) \
         .filter(Message.MediaUrl!=None) \
-        .filter(Phonebook.Name!=None) \
         .filter(Message.MessageSid==sid) \
         .all()
 
     phonebook = db.session.query(Phonebook) \
-        .outerjoin(Message, Phonebook.Number==Message.From) \
+        .join(Message, Phonebook.Number==Message.From) \
         .filter(Message.AccountSid==app.config['TWILIO_ACCOUNT_SIDS_CSV']) \
         .filter(Message.To==app.config['PHONE_NUMBER']) \
         .filter(Message.MediaUrl!=None) \
