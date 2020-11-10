@@ -9,8 +9,8 @@
         {% for msg in msgs %}
         <div class="image-container">
             <div class="">
-                <a href="{{ msg.Message.MediaUrl }}" >
-                    <img src="{{ msg.Message.MediaUrl}}" alt="{{ msg.Message.Body }}" />
+                <a href="{{ msg.Message.MediaUrl|localize }}" >
+                    <img src="{{ msg.Message.MediaUrl|localize }}" alt="{{ msg.Message.Body }}" />
                 </a>
             </div>
             <p class="description"><a href="{{ url_for('gallery.index', name=msg.Phonebook.Name) }}">{{ msg.Phonebook.Name }}</a> {{ msg.Message.Body }}</p>

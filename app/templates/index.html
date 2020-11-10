@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <a href="{{ url_for('gallery.image', sid=msg.Message.MessageSid) }}" >
-                        <img src="{{ msg.Message.MediaUrl}}" title="{{ msg.Message.Body }}" />
+                        <img src="{{ msg.Message.MediaUrl|localize }}" title="{{ msg.Message.Body }}" />
                     </a>
                 </div>
                 <p class="description" title="{{ msg.Message.Body}}"><a href="{{ url_for('gallery.index', name=msg.Phonebook.Name) }}" title="{{msg.Phonebook.Name}}'s Gallery">{{ msg.Phonebook.Name }}</a> {{ msg.Message.Body }}</p>
