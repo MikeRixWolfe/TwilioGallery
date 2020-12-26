@@ -10,7 +10,7 @@
         <div class="image-container">
             <div class="">
                 <a href="{{ msg.Message.MediaUrl|localize }}" >
-                    <img src="{{ msg.Message.MediaUrl|localize }}" alt="{{ msg.Message.Body }}" />
+                    <img src="{{ msg.Message.MediaUrl|localize }}" title="{{ msg.Message.Body }}" />
                 </a>
             </div>
             <p class="description"><a href="{{ url_for('gallery.index', name=msg.Phonebook.Name) }}">{{ msg.Phonebook.Name }}</a> {{ msg.Message.Body }}</p>
